@@ -9,9 +9,18 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    // Existing navbar shrink function
+    // Navbar shrink function
     var navbarShrink = function () {
-        // Your existing navbar shrink code here
+        const navbarCollapsible = document.body.querySelector('#mainNav');
+        if (!navbarCollapsible) {
+            return;
+        }
+        if (window.scrollY === 0) {
+            navbarCollapsible.classList.remove('navbar-shrink')
+        } else {
+            navbarCollapsible.classList.add('navbar-shrink')
+        }
+
     };
 
     // Shrink the navbar 
@@ -23,7 +32,10 @@ window.addEventListener('DOMContentLoaded', event => {
     // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
-        // Your existing scrollspy code here
+        new bootstrap.ScrollSpy(document.body, {
+            target: '#mainNav',
+            rootMargin: '0px 0px -40%',
+        });
     };
 
     // Collapse responsive navbar when toggler is visible
@@ -32,26 +44,26 @@ window.addEventListener('DOMContentLoaded', event => {
         document.querySelectorAll('#navbarResponsive .nav-link')
     );
     responsiveNavItems.map(function (responsiveNavItem) {
-        // Your existing collapse navbar code here
-    });
-
-    // New code for animating elements on scroll
-    function isInViewport(element) {
-        // Function to check if an element is in the viewport
-        // Same as provided earlier
-
-    }
-
-    function animateOnScroll() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        elements.forEach(element => {
-            if (isInViewport(element)) {
-                element.classList.add('visible');
+        responsiveNavItem.addEventListener('click', () => {
+            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+                navbarToggler.click();
             }
         });
-    }
-
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll();
+    });
 
 });
+
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+ acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+ });
+}
