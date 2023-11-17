@@ -9,18 +9,9 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    // Navbar shrink function
+    // Existing navbar shrink function
     var navbarShrink = function () {
-        const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) {
-            return;
-        }
-        if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
-        } else {
-            navbarCollapsible.classList.add('navbar-shrink')
-        }
-
+        // Your existing navbar shrink code here
     };
 
     // Shrink the navbar 
@@ -32,10 +23,7 @@ window.addEventListener('DOMContentLoaded', event => {
     // Activate Bootstrap scrollspy on the main nav element
     const mainNav = document.body.querySelector('#mainNav');
     if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
+        // Your existing scrollspy code here
     };
 
     // Collapse responsive navbar when toggler is visible
@@ -44,11 +32,26 @@ window.addEventListener('DOMContentLoaded', event => {
         document.querySelectorAll('#navbarResponsive .nav-link')
     );
     responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
+        // Your existing collapse navbar code here
+    });
+
+    // New code for animating elements on scroll
+    function isInViewport(element) {
+        // Function to check if an element is in the viewport
+        // Same as provided earlier
+
+    }
+
+    function animateOnScroll() {
+        const elements = document.querySelectorAll('.animate-on-scroll');
+        elements.forEach(element => {
+            if (isInViewport(element)) {
+                element.classList.add('visible');
             }
         });
-    });
+    }
+
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
 
 });
